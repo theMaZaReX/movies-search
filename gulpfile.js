@@ -22,7 +22,8 @@ const sass         = require('gulp-sass'),
 
 const path = {
     source:{
-        html: './pages/*.html',
+        html: './*.html',
+        php: sourceFolder + '/php/**/*.php',
         scss: sourceFolder + '/scss/style.scss',
         js: [sourceFolder + '/js/**/*.js', 'node_modules/bootstrap/dist/js/bootstrap.js'],
         jquery: 'node_modules/jquery/dist/jquery.min.js',
@@ -31,7 +32,8 @@ const path = {
         fonts: sourceFolder + '/fonts/**/*.ttf'
     },
     build:{
-        html: buildFolder + '/pages/',
+        html: buildFolder + '/',
+        php: buildFolder + '/' + sourceFolder + '/php/',
         styles: buildFolder + '/' + sourceFolder + '/css/',
         js: buildFolder + '/' + sourceFolder + '/js/',
         img: buildFolder + '/' + sourceFolder + '/img/',
@@ -39,7 +41,8 @@ const path = {
         fonts: buildFolder + '/' + sourceFolder + '/fonts/'
     },
     whatch:{
-        html: './pages/*.html',
+        html: './*.html',
+        php: './src/php/**/*.php',
         styles: sourceFolder + '/scss/**/*.scss',
         js: sourceFolder + '/js/**/*.js',
         fonts: sourceFolder + '/fonts/**/*.ttf'
@@ -48,17 +51,22 @@ const path = {
 
 function browser_sync(){
     browserSync.init({
-        server: {
-            baseDir: ["build/pages", "build"],
-        },
+        proxy: 'http://movie-search.ru/',
         online: true
     })
 
 }
 
+
 function html(){
     return src(path.source.html)
         .pipe(dest(path.build.html))
+        .pipe(browserSync.stream());
+}
+
+function php(){
+    return src(path.source.php)
+        .pipe(dest(path.build.php))
         .pipe(browserSync.stream());
 }
 
@@ -142,6 +150,7 @@ function startWatch(){
     watch(path.whatch.styles, styles);
     watch([path.whatch.js, '!'+buildFolder+sourceFolder+'/js/scripts.min.js'], scripts);
     watch(path.whatch.html, html);
+    watch(path.whatch.php, php);
     watch(path.source.img, images);
     watch(path.source.videos, videos);
 }
@@ -154,11 +163,12 @@ function cleanbuild(){
 exports.startWatch = startWatch;
 exports.browser_sync = browser_sync;
 exports.html = html;
+exports.php = php;
 exports.styles = styles;
 exports.stylesbuild = stylesbuild;
 exports.scripts = scripts;
 exports.scriptsbuild = scriptsbuild;
 exports.images = images;
 exports.cleanbuild = cleanbuild;
-exports.default =  series(cleanbuild, parallel(scripts, styles, images, html, videos), startWatch);
-exports.build = series(cleanbuild, parallel(scriptsbuild, stylesbuild, images, html, videos));
+exports.default =  series(cleanbuild, parallel(scripts, styles, images, html, php, videos), startWatch);
+exports.build = series(cleanbuild, parallel(scriptsbuild, stylesbuild, images, html, php, videos));
