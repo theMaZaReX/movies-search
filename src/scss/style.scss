@@ -1,2 +1,90 @@
 @import './node_modules/bootstrap/scss/bootstrap.scss';
 
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40vh;
+  overflow: hidden;
+  background: url('/src/img/mobile-bckg.jpg') no-repeat center;
+  background-size: cover;
+
+  &__content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+
+  &__title {
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    &__title {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__video {
+
+  }
+
+  &__video video {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    &__video video {
+      display: block;
+      transform: translateY(-15%);
+      width: 100%;
+      height: 100%;
+    }
+    &__video:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.main {
+  background: #7952b3;
+  height: 60vh;
+}
+
+.search {
+  width: 95%;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .search {
+    width: 40%;
+
+    &__form {
+      flex-direction: row;
+
+    }
+  }
+
+}
