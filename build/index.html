@@ -20,8 +20,10 @@
                                    placeholder="Введите название фильма...">
                             <button class="btn btn-warning my-2" type="submit" >Search</button>
                         </form>
+
                     </div>
                 </div>
+
                 <div class="header__video ">
                     <video src="src/videos/THE_BATMAN.mp4" autoplay loop muted></video>
                 </div>
@@ -30,9 +32,13 @@
     </div>
 
 </header>
-<main>
+<main class="main">
+    <div class="loader">
+        <div class="spinner-border text-warning loader__spiner" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
     <section class="results">
-
 
     </section>
 </main>

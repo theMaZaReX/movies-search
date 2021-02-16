@@ -2,12 +2,12 @@ const result = $('.results');
 
 
 const outputMovies = function (data) {
-
+    $('.loader').removeClass('show-loader');
 
     if (data) {
         result.append(`
         <div class="container-fluid p-0">
-            <div class="row"> 
+            <div class="row justify-content-center"> 
             </div>
         </div>
 `)
@@ -15,6 +15,7 @@ const outputMovies = function (data) {
         const movies = JSON.parse(data);
         movies.forEach(function (movie) {
             row.append(`
+
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="results__item">
                  <div class="results__item-image">
@@ -40,9 +41,11 @@ const outputMovies = function (data) {
 $(document).ready(function () {
 
     $('.search__form').submit(function (e) {
+
         const searchRequest = $('.search__form-input').val();
         e.preventDefault();
         if (searchRequest.length >= 3) {
+            $('.loader').addClass('show-loader');
             $.ajax({
                 type: "GET",
                 url: './src/php/search.php',
@@ -52,7 +55,6 @@ $(document).ready(function () {
         }
         else{
            alert('В поисковой строке должно быть хотя бы 3 символа');
-
         }
     })
 

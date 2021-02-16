@@ -83,9 +83,13 @@
   }
 
 }
+.main{
+  padding: 30px;
+}
+
 .results{
   background: #7952b3;
-  padding: 30px;
+
 
   &__item{
     padding:5px 5px;
@@ -106,4 +110,14 @@
     }
   }
 }
-
+.loader{
+  display:none;
+  &__spiner{
+    width: 100px;
+    height: 100px;
+  }
+}
+.loader.show-loader{
+  display: flex;
+  justify-content: center;
+}
