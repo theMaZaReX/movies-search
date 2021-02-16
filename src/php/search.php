@@ -96,7 +96,7 @@ class SearchMovies
 }
 
 
-$search = new SearchMovies('k_3ha26x01', "{$_GET['title']}");
+$search = new SearchMovies('k_q6fsy7pr', "{$_GET['title']}");
 $searchResults = $search->getMoviesAndSeries();
 
 echo json_encode($searchResults);

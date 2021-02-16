@@ -62,11 +62,6 @@
   }
 }
 
-.main {
-  background: #7952b3;
-  height: 60vh;
-}
-
 .search {
   width: 95%;
 
@@ -87,5 +82,28 @@
     }
   }
 
+}
+.results{
+  background: #7952b3;
+  padding: 30px;
+
+  &__item{
+    padding:5px 5px;
+    margin:10px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    background-color: #f8f9fa;
+    &-image{
+      text-align: center;
+    }
+    &-image img{
+      max-width:200px;
+    }
+    &-title{
+      font-size:2.0rem;
+      text-align: center;
+    }
+  }
 }
 

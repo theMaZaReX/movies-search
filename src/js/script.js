@@ -15,20 +15,20 @@ const outputMovies = function (data) {
         const movies = JSON.parse(data);
         movies.forEach(function (movie) {
             row.append(`
-            <div class="col-lg-4 col-md-6 col-md-12">
+            <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="results__item">
                  <div class="results__item-image">
                   <img class='results__item-img' src=${movie.image}>
                  </div> 
-                    <span class="results__item-title">${movie.title}</span>
-                    <div class="results__item-type">${movie.type}</div>
-                    <div class="results__item-year">${movie.year}</div>
-                    <div class="results__item-genres">${movie.genres}</div>
-                    <div class="results__item-releaseDate">${movie.releaseDate}</div>
-                    <div class="results__item-plot">${movie.plot}</div>
-                    <div class="results__item-directors">${movie.directors}</div>
-                    <div class="results__item-writers">${movie.writers}</div>
-                    <div class="results__item-stars">${movie.stars}</div>
+                    <div class="results__item-title">${movie.title}</div>
+                    <div class="results__item-type"><b>Тип:</b> ${movie.type}</div>
+                    <div class="results__item-year"><b>Год:</b> ${movie.year}</div>
+                    <div class="results__item-genres"><b>Жанры:</b> ${movie.genres}</div>
+                    <div class="results__item-releaseDate"><b>Дата выпуска:</b> ${movie.releaseDate}</div>
+                    <div class="results__item-plot"><b>Описание:</b> ${movie.plot}</div>
+                    <div class="results__item-directors"><b>Режисеры:</b> ${movie.directors}</div>
+                    <div class="results__item-writers"><b>Сценаристы:</b> ${movie.writers}</div>
+                    <div class="results__item-stars"><b>Актеры:</b> ${movie.stars}</div>
                 </div>
                 </div>
             `)
