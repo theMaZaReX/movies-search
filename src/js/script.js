@@ -1,48 +1,60 @@
-const result = $('.results');
-
+const result = $('.results .container-fluid');
+const order = { //порядок добавления нужных полей для каждого фильма
+    image: '',
+    title: '',
+    type: 'Тип',
+    year: 'Год',
+    genres: 'Жанры',
+    releaseDate: 'Дата выхода',
+    plot: 'Описание',
+    directors: 'Режисеры',
+    writers: 'Сценаристы',
+    stars: 'Звезды'
+}
+const orderKeys = Object.keys(order);
 
 const outputMovies = function (data) {
+
+    if (result.children().length > 0) {
+        result.empty();
+    }
+
     $('.loader').removeClass('show-loader');
 
     if (data) {
-        result.append(`
-        <div class="container-fluid p-0">
-            <div class="row justify-content-center"> 
-            </div>
-        </div>
-`)
+        result.append(`<div class="row justify-content-center p-4"></div>`);
+
         const row = $('.results .row');
+        const resultItem = `<div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="results__item"></div>
+                            </div>`;
         const movies = JSON.parse(data);
+
         movies.forEach(function (movie) {
-            row.append(`
-
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="results__item">
-                 <div class="results__item-image">
-                  <img class='results__item-img' src=${movie.image}>
-                 </div> 
-                    <div class="results__item-title">${movie.title}</div>
-                    <div class="results__item-type"><b>Тип:</b> ${movie.type}</div>
-                    <div class="results__item-year"><b>Год:</b> ${movie.year}</div>
-                    <div class="results__item-genres"><b>Жанры:</b> ${movie.genres}</div>
-                    <div class="results__item-releaseDate"><b>Дата выпуска:</b> ${movie.releaseDate}</div>
-                    <div class="results__item-plot"><b>Описание:</b> ${movie.plot}</div>
-                    <div class="results__item-directors"><b>Режисеры:</b> ${movie.directors}</div>
-                    <div class="results__item-writers"><b>Сценаристы:</b> ${movie.writers}</div>
-                    <div class="results__item-stars"><b>Актеры:</b> ${movie.stars}</div>
-                </div>
-                </div>
-            `)
+            $('.results .row').append(resultItem);
+            orderKeys.forEach(function (field) {
+                if (movie.hasOwnProperty(field)) {
+                    if (field == 'image') {
+                        const fieldElem = `<div class="results__item-${field}"><img src="${movie[field]}"></div>`;
+                        $('.results__item').last().append(fieldElem);
+                    } else {
+                        const fieldElem = `<div class="results__item-${field}"><b>${field != 'title' ? order[field] + ':' : ''}</b> ${movie[field]}</div>`;
+                        $('.results__item').last().append(fieldElem);
+                    }
+                }
+            })
         })
+    } else {
+        alert('Ошибка на стороне сервера');
     }
-}
 
+}
 
 $(document).ready(function () {
 
     $('.search__form').submit(function (e) {
 
-        const searchRequest = $('.search__form-input').val();
+        const searchRequest = $('.search__form-input').val().trim();
         e.preventDefault();
         if (searchRequest.length >= 3) {
             $('.loader').addClass('show-loader');
@@ -52,9 +64,8 @@ $(document).ready(function () {
                 data: {title: searchRequest},
                 success: outputMovies,
             })
-        }
-        else{
-           alert('В поисковой строке должно быть хотя бы 3 символа');
+        } else {
+            alert('В поисковой строке должно быть хотя бы 3 символа');
         }
     })
 
