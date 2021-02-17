@@ -79,9 +79,10 @@ class SearchMovies
     private function responseToAPI(string $API, $data)
     {
         $this->curl = curl_init();
+        $url_data = str_replace (' ','%20',$data);
 
         curl_setopt_array($this->curl, array(
-            CURLOPT_URL => "https://imdb-api.com/en/API/$API/$this->API_KEY/$data",
+            CURLOPT_URL => "https://imdb-api.com/en/API/$API/$this->API_KEY/$url_data",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -90,8 +91,6 @@ class SearchMovies
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
         ));
-
-
 
         $response = json_decode(curl_exec($this->curl));
         if(!$response || $response->errorMessage){
