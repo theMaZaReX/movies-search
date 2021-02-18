@@ -2,8 +2,6 @@
 
 .header {
   position: relative;
-  display: flex;
-  align-items: center;
   height: 40vh;
   overflow: hidden;
   background: url('/src/img/mobile-bckg.jpg') no-repeat center;
@@ -74,10 +72,8 @@
 
     &__form {
       flex-direction: row;
-
     }
   }
-
 }
 
 .results {

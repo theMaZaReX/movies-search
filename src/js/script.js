@@ -47,7 +47,6 @@ const outputMovies = function (data) {
     } else {
         alert('Ошибка на стороне сервера');
     }
-
 }
 
 $(document).ready(function () {
@@ -68,5 +67,4 @@ $(document).ready(function () {
             alert('В поисковой строке должно быть хотя бы 3 символа');
         }
     })
-
 })
